@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "+A Educação - Full Stack Web Developer\r ===================",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx watch src/server.ts"
   },
   "keywords": [],
   "author": "gabrields <gabrields1910@gmail.com>",
@@ -13,5 +15,9 @@
     "prisma": "^5.8.1",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.8.1",
+    "fastify": "^4.25.2"
   }
 }
