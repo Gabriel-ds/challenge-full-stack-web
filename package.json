@@ -1,0 +1,17 @@
+{
+  "name": "challenge-full-stack-web",
+  "version": "1.0.0",
+  "description": "+A Educação - Full Stack Web Developer\r ===================",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "gabrields <gabrields1910@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "prisma": "^5.8.1",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
