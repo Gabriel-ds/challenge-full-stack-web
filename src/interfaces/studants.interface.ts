@@ -14,4 +14,6 @@ export interface StudantCreate {
 }
 export interface StudantRepository {
     create(data: StudantCreate): Promise<Studant>;
+    listAllStudents(): Promise<Studant[]>;
+    delete(id: string): Promise<Studant>;
 }

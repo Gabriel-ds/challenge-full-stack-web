@@ -19,7 +19,22 @@ export async function studentRoutes(fastify: FastifyInstance) {
         }
     })
 
-    fastify.get('/', (req, reply) => {
-        reply.send({ hello: 'world' })
+    fastify.get('/', async (req, reply) => {
+        try {
+            const data = await studentUseCase.listAllStudents()
+            reply.send(data)
+        } catch (error) {
+            reply.send(error)
+        }
+    })
+
+    fastify.delete<{ Params: { id: string } }>('/:id', async (req, reply) => {
+        const { id } = req.params
+        try {
+            const data = await studentUseCase.delete(id)
+            return reply.send(data)
+        } catch (error) {
+            reply.send(error)
+        }
     })
 }

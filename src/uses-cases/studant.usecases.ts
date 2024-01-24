@@ -12,6 +12,17 @@ class StudentUseCase {
 
         return result;
     }
+
+    async listAllStudents(): Promise<Studant[]> {
+        const result = await this.studentRepository.listAllStudents()
+        console.log(result)
+        return result
+    }
+
+    async delete(id: string) {
+        const data = await this.studentRepository.delete(id)
+        return data
+    }
 }
 
 export { StudentUseCase };
