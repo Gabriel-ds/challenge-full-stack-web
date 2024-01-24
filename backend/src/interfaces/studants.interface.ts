@@ -3,8 +3,6 @@ export interface Studant {
     name: string;
     ra: number;
     cpf: string
-    createdAt: Date;
-    updatedAt: Date;
 }
 
 export interface StudantCreate {
@@ -14,6 +12,7 @@ export interface StudantCreate {
 }
 export interface StudantRepository {
     create(data: StudantCreate): Promise<Studant>;
-    listAllStudents(): Promise<Studant[]>;
+    listAllStudants(): Promise<Studant[]>;
+    updateStudant({ id, cpf, name, ra }: Studant): Promise<Studant>;
     delete(id: string): Promise<Studant>;
 }

@@ -13,8 +13,16 @@ class StudantRepositoryPrisma implements StudantRepository {
         return result;
     }
 
-    async listAllStudents(): Promise<Studant[]> {
+    async listAllStudants(): Promise<Studant[]> {
         const result = await prisma.studant.findMany()
+        return result
+    }
+
+    async updateStudant({ id, cpf, name, ra }: Studant): Promise<Studant> {
+        const result = await prisma.studant.update({
+            where: { id },
+            data: { cpf, name, ra }
+        })
         return result
     }
 
