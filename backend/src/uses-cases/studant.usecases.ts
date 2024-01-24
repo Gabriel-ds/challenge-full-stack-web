@@ -8,6 +8,12 @@ class StudentUseCase {
     }
 
     async create({ name, cpf, ra }: StudantCreate): Promise<Studant> {
+        const verifyExistStudant = await this.studentRepository.findByCpfOrRa(cpf, ra)
+
+        if (verifyExistStudant) {
+            throw new Error('Studant already exists')
+        }
+
         const result = await this.studentRepository.create({ name, cpf, ra });
 
         return result;

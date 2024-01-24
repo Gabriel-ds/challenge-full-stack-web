@@ -13,6 +13,15 @@ class StudantRepositoryPrisma implements StudantRepository {
         return result;
     }
 
+    async findByCpfOrRa(cpf: string, ra: number): Promise<Studant | null> {
+        const result = await prisma.studant.findFirst({
+            where: {
+                OR: [{ cpf }, { ra }],
+            },
+        })
+        return result
+    }
+
     async listAllStudants(): Promise<Studant[]> {
         const result = await prisma.studant.findMany()
         return result
