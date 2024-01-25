@@ -15,5 +15,5 @@ export interface StudantRepository {
     findByCpfOrRa(cpf: string, ra: number): Promise<Studant | null>
     listAllStudants(): Promise<Studant[]>;
     updateStudant({ id, cpf, name, ra }: Studant): Promise<Studant>;
-    delete(id: string): Promise<Studant>;
+    delete(id: string): Promise<Studant | null>;
 }

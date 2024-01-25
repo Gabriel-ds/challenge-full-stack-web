@@ -1,9 +1,11 @@
 import { FastifyInstance } from 'fastify';
 import { Studant, StudantCreate } from '../interfaces/studants.interface';
+import { StudantRepositoryPrisma } from '../repositories/studant.repository';
 import { StudentUseCase } from '../uses-cases/student.usecases';
 
 export async function studentRoutes(fastify: FastifyInstance) {
-    const studentUseCase = new StudentUseCase()
+    const studentRepository = new StudantRepositoryPrisma();
+    const studentUseCase = new StudentUseCase(studentRepository);
 
     fastify.post<{ Body: StudantCreate }>('/', async (req, reply) => {
         const { cpf, name, ra } = req.body

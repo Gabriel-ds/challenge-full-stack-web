@@ -5,14 +5,16 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "tsx watch src/server.ts"
   },
   "keywords": [],
   "author": "gabrields <gabrields1910@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "jest": "^29.7.0",
     "prisma": "^5.8.1",
+    "ts-jest": "^29.1.2",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3"
   },

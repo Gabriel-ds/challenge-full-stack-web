@@ -1,11 +1,10 @@
 import { Studant, StudantCreate, StudantRepository } from '../interfaces/studants.interface';
-import { StudantRepositoryPrisma } from '../repositories/studant.repository';
 import { validateStudentData } from './validationsUtils';
 
 class StudentUseCase {
     private studentRepository: StudantRepository;
-    constructor() {
-        this.studentRepository = new StudantRepositoryPrisma();
+    constructor(studentRepository: StudantRepository) {
+        this.studentRepository = studentRepository;
     }
 
     async create({ name, cpf, ra }: StudantCreate): Promise<Studant> {
