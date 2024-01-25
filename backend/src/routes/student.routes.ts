@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify';
 import { Studant, StudantCreate } from '../interfaces/studants.interface';
-import { StudentUseCase } from '../uses-cases/studant.usecases';
+import { StudentUseCase } from '../uses-cases/student.usecases';
 
 export async function studentRoutes(fastify: FastifyInstance) {
     const studentUseCase = new StudentUseCase()

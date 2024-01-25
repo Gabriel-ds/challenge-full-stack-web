@@ -1,5 +1,6 @@
 import { Studant, StudantCreate, StudantRepository } from '../interfaces/studants.interface';
-import { StudantRepositoryPrisma } from '../repositories/student.repository';
+import { StudantRepositoryPrisma } from '../repositories/studant.repository';
+import { validateStudentData } from './validationsUtils';
 
 class StudentUseCase {
     private studentRepository: StudantRepository;
@@ -8,14 +9,13 @@ class StudentUseCase {
     }
 
     async create({ name, cpf, ra }: StudantCreate): Promise<Studant> {
+        validateStudentData({ cpf, name, ra })
         const verifyExistStudant = await this.studentRepository.findByCpfOrRa(cpf, ra)
-
         if (verifyExistStudant) {
-            throw new Error('Studant already exists')
+            throw new Error('Estudante já existe.');
         }
 
         const result = await this.studentRepository.create({ name, cpf, ra });
-
         return result;
     }
 
@@ -25,18 +25,18 @@ class StudentUseCase {
     }
 
     async updateStudant({ id, cpf, name, ra }: Studant) {
-        const data = await this.studentRepository.updateStudant({
+        const result = await this.studentRepository.updateStudant({
             id,
             cpf,
             name,
             ra
         })
-        return data
+        return result
     }
 
     async delete(id: string) {
-        const data = await this.studentRepository.delete(id)
-        return data
+        const result = await this.studentRepository.delete(id)
+        return result
     }
 }
 
