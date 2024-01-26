@@ -28,10 +28,10 @@ class StudantRepositoryPrisma implements StudantRepository {
         return result
     }
 
-    async updateStudant({ id, cpf, name, ra, email }: Studant): Promise<Studant> {
+    async updateStudant({ id, name, email }: Studant): Promise<Studant> {
         const result = await prisma.studant.update({
             where: { id },
-            data: { cpf, name, ra, email }
+            data: { name, email }
         })
         return result
     }

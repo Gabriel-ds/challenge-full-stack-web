@@ -1,4 +1,4 @@
-import { Studant, StudantCreate, StudantRepository } from '../interfaces/studants.interface';
+import { Studant, StudantCreate, StudantRepository, StudantUpdate } from '../interfaces/studants.interface';
 import { validateStudentData } from './validationsUtils';
 
 class StudentUseCase {
@@ -23,12 +23,10 @@ class StudentUseCase {
         return result
     }
 
-    async updateStudant({ id, cpf, name, ra, email }: Studant) {
+    async updateStudant({ id, name, email }: StudantUpdate) {
         const result = await this.studentRepository.updateStudant({
             id,
-            cpf,
             name,
-            ra,
             email
         })
         return result

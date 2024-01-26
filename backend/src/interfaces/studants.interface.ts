@@ -12,10 +12,16 @@ export interface StudantCreate {
     cpf: string;
     email: string;
 }
+
+export interface StudantUpdate {
+    id: string;
+    name: string;
+    email: string;
+}
 export interface StudantRepository {
     create(data: StudantCreate): Promise<Studant>;
     findByCpfOrRa(cpf: string, ra: string): Promise<Studant | null>
     listAllStudants(): Promise<Studant[]>;
-    updateStudant({ id, cpf, name, ra, email }: Studant): Promise<Studant>;
+    updateStudant({ id, name, email }: StudantUpdate): Promise<Studant>;
     delete(id: string): Promise<Studant | null>;
 }

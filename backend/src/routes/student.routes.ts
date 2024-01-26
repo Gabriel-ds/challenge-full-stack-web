@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import { Studant, StudantCreate } from '../interfaces/studants.interface';
+import { StudantCreate, StudantUpdate } from '../interfaces/studants.interface';
 import { StudantRepositoryPrisma } from '../repositories/studant.repository';
 import { StudentUseCase } from '../uses-cases/student.usecases';
 
@@ -31,12 +31,12 @@ export async function studentRoutes(fastify: FastifyInstance) {
         }
     })
 
-    fastify.put<{ Body: Studant, Params: { id: string } }>('/:id', async (req, reply) => {
+    fastify.put<{ Body: StudantUpdate, Params: { id: string } }>('/:id', async (req, reply) => {
         const { id } = req.params
-        const { cpf, name, ra, email } = req.body
+        const { name, email } = req.body
         try {
             const data = await studentUseCase.updateStudant({
-                cpf, id, name, ra, email
+                id, name, email
             })
             return reply.send(data)
         } catch (error) {
