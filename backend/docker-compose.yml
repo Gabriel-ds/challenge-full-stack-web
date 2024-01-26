@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql
+    container_name: api_aeducacao
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: aeducacao
+    ports:
+      - "3306:3306"
