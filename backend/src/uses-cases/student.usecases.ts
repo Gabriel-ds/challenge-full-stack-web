@@ -7,14 +7,14 @@ class StudentUseCase {
         this.studentRepository = studentRepository;
     }
 
-    async create({ name, cpf, ra }: StudantCreate): Promise<Studant> {
-        validateStudentData({ cpf, name, ra })
+    async create({ name, cpf, ra, email }: StudantCreate): Promise<Studant> {
+        validateStudentData({ cpf, name, ra, email })
         const verifyExistStudant = await this.studentRepository.findByCpfOrRa(cpf, ra)
         if (verifyExistStudant) {
             throw new Error('Estudante já existe.');
         }
 
-        const result = await this.studentRepository.create({ name, cpf, ra });
+        const result = await this.studentRepository.create({ name, cpf, ra, email });
         return result;
     }
 
@@ -23,12 +23,13 @@ class StudentUseCase {
         return result
     }
 
-    async updateStudant({ id, cpf, name, ra }: Studant) {
+    async updateStudant({ id, cpf, name, ra, email }: Studant) {
         const result = await this.studentRepository.updateStudant({
             id,
             cpf,
             name,
-            ra
+            ra,
+            email
         })
         return result
     }

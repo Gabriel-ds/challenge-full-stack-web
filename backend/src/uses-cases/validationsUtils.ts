@@ -1,7 +1,7 @@
 import { StudantCreate } from "../interfaces/studants.interface";
 
-export function validateStudentData({ name, cpf, ra }: StudantCreate): void {
-    if (!name || !cpf || !ra) {
+export function validateStudentData({ name, cpf, ra, email }: StudantCreate): void {
+    if (!name || !cpf || !ra || !email) {
         throw new Error('Todos os campos são obrigatórios.');
     }
 
@@ -9,7 +9,11 @@ export function validateStudentData({ name, cpf, ra }: StudantCreate): void {
         throw new Error('CPF inválido.');
     }
 
-    if (typeof ra !== 'number') {
+    if (typeof ra !== 'string') {
         throw new Error('RA inválido.');
+    }
+
+    if (typeof email !== 'string') {
+        throw new Error('Email inválido.');
     }
 }

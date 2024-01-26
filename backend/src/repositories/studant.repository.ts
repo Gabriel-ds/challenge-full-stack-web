@@ -8,12 +8,13 @@ class StudantRepositoryPrisma implements StudantRepository {
                 name: data.name,
                 cpf: data.cpf,
                 ra: data.ra,
+                email: data.email
             },
         });
         return result;
     }
 
-    async findByCpfOrRa(cpf: string, ra: number): Promise<Studant | null> {
+    async findByCpfOrRa(cpf: string, ra: string): Promise<Studant | null> {
         const result = await prisma.studant.findFirst({
             where: {
                 OR: [{ cpf }, { ra }],
@@ -27,10 +28,10 @@ class StudantRepositoryPrisma implements StudantRepository {
         return result
     }
 
-    async updateStudant({ id, cpf, name, ra }: Studant): Promise<Studant> {
+    async updateStudant({ id, cpf, name, ra, email }: Studant): Promise<Studant> {
         const result = await prisma.studant.update({
             where: { id },
-            data: { cpf, name, ra }
+            data: { cpf, name, ra, email }
         })
         return result
     }

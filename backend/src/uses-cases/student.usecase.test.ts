@@ -11,7 +11,7 @@ class MockStudantRepository implements StudantRepository {
         return newStudent;
     }
 
-    async findByCpfOrRa(cpf: string, ra: number): Promise<Studant | null> {
+    async findByCpfOrRa(cpf: string, ra: string): Promise<Studant | null> {
         return this.students.find((student) => student.cpf === cpf || student.ra === ra) || null;
     }
 
@@ -51,7 +51,8 @@ describe('StudentUseCase', () => {
         const studentData: StudantCreate = {
             name: 'Bill Gates',
             cpf: '123.456.789-03',
-            ra: 123457,
+            ra: '123457',
+            email: "bill@email.com"
         };
 
         const createdStudent = await studentUseCase.create(studentData);
@@ -64,8 +65,8 @@ describe('StudentUseCase', () => {
 
     it('lists all students', async () => {
         const studentsData: StudantCreate[] = [
-            { name: 'Bill Gates', cpf: '123.456.789-01', ra: 123456 },
-            { name: 'Steve Jobs', cpf: '987.654.321-09', ra: 654321 },
+            { name: 'Bill Gates', cpf: '123.456.789-01', ra: '123456', email: "bill@email.com" },
+            { name: 'Steve Jobs', cpf: '987.654.321-09', ra: '654321', email: "steve@email.com" },
         ];
 
         await Promise.all(studentsData.map((student) => studentUseCase.create(student)));
@@ -76,7 +77,7 @@ describe('StudentUseCase', () => {
     });
 
     it('updates a student', async () => {
-        const studentData: StudantCreate = { name: 'Bill Gates', cpf: '123.456.789-01', ra: 123456 };
+        const studentData: StudantCreate = { name: 'Bill Gates', cpf: '123.456.789-01', ra: '123456', email: "bill@email.com" };
         const createdStudent = await studentUseCase.create(studentData);
 
         const updatedStudentData: Studant = { ...createdStudent, name: 'Elon Musk' };
@@ -89,7 +90,8 @@ describe('StudentUseCase', () => {
         const studentData: StudantCreate = {
             name: 'Bill Gates',
             cpf: '123.456.789-01',
-            ra: 123456,
+            ra: '123456',
+            email: 'bill@email.com'
         };
 
         const createdStudent = await studentUseCase.create(studentData);

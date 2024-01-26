@@ -8,12 +8,13 @@ export async function studentRoutes(fastify: FastifyInstance) {
     const studentUseCase = new StudentUseCase(studentRepository);
 
     fastify.post<{ Body: StudantCreate }>('/', async (req, reply) => {
-        const { cpf, name, ra } = req.body
+        const { cpf, name, ra, email } = req.body
         try {
             const data = await studentUseCase.create({
                 name,
                 cpf,
-                ra
+                ra,
+                email
             })
             return reply.send(data)
         } catch (error) {
@@ -32,10 +33,10 @@ export async function studentRoutes(fastify: FastifyInstance) {
 
     fastify.put<{ Body: Studant, Params: { id: string } }>('/:id', async (req, reply) => {
         const { id } = req.params
-        const { cpf, name, ra } = req.body
+        const { cpf, name, ra, email } = req.body
         try {
             const data = await studentUseCase.updateStudant({
-                cpf, id, name, ra
+                cpf, id, name, ra, email
             })
             return reply.send(data)
         } catch (error) {
