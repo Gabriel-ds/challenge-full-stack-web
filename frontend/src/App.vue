@@ -94,19 +94,87 @@
 
       </v-container>
     </v-main>
+
+    <v-dialog v-model="isDialogOpen" width="600px" style="z-index: 10">
+            <v-card class="pa-6">
+              <v-card-title>{{
+                isEdit ? "Editar aluno" : "Adicionar aluno"
+              }}</v-card-title>
+
+              <v-form ref="form">
+                <v-card-text class="d-flex flex-column ga-4">
+                  <v-text-field
+                    variant="outlined"
+                    label="Nome"
+                    :rules="rules.name"
+                    v-model="formDataStudant.name"
+                  />
+                  <v-text-field
+                    variant="outlined"
+                    label="Email"
+                    :rules="rules.email"
+                    v-model="formDataStudant.email"
+                  />
+                  <v-text-field
+                    variant="outlined"
+                    :disabled="isEdit"
+                    :rules="rules.ra"
+                    label="RA"
+                    v-maska:[optionsRa]
+                    v-model="formDataStudant.ra"
+                  />
+                  <v-text-field
+                    variant="outlined"
+                    :disabled="isEdit"
+                    :rules="rules.cpf"
+                    label="CPF"
+                    v-maska:[optionsCpf]
+                    v-model="formDataStudant.cpf"
+                  />
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn variant="text" @click="handleCancelModal">
+                    Cancelar
+                  </v-btn>
+                  <v-btn variant="tonal" color="success" @click="onSubmit">
+                    Salvar
+                  </v-btn>
+                </v-card-actions>
+              </v-form>
+            </v-card>
+          </v-dialog>
+
   </v-app>
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from "vue";
+import { vMaska } from "maska";
+import { onMounted, reactive, ref, watch } from "vue";
 import logoSrc from "../src/assets/logo-mais-a-educacao.png";
 import { ApiStudents } from "./services/apiSudents";
+
+const defaultStudant = {
+  name: "",
+  email: "",
+  cpf: "",
+  ra: "",
+};
 
 const isDrawerOpen = ref(true);
 const dataStudants = ref([]);
 const filterRows = ref([]);
 const inputSearch = ref("");
+const isDialogOpen = ref(false);
+const isEdit = ref(false);
 const searchData = ref("");
+const formDataStudant = reactive({
+  name: "",
+  email: "",
+  cpf: "",
+  ra: "",
+});
 
 const apiStudents = ApiStudents();
   
@@ -150,6 +218,70 @@ watch(searchData, () => {
     );
   filterRows.value = filter;
 });
+
+const optionsCpf = { mask: "###.###.###-##" };
+const optionsRa = { mask: "##########" };
+
+const rules = {
+  email: [
+    (value) => {
+      if (value) {
+        return true;
+      }
+      return "O email é obrigatório";
+    },
+    (value) => {
+      if (value.includes("@")) {
+        return true;
+      }
+
+      return "Email inválido";
+    },
+  ],
+  cpf: [
+    (value) => {
+      if (value) {
+        return true;
+      }
+      return "O CPF é obrigatório";
+    },
+    (value) => {
+      if (value.length > 13) {
+        return true;
+      }
+
+      return "CPF inválido";
+    },
+  ],
+  name: [
+    (value) => {
+      if (value) {
+        return true;
+      }
+      return "O nome é obrigatório";
+    },
+  ],
+  ra: [
+    (value) => {
+      if (value) {
+        return true;
+      }
+      return "O RA é obrigatório";
+    },
+  ],
+};
+
+const handleAddStudent = () => {
+  Object.assign(formDataStudant, defaultStudant);
+  isEdit.value = false;
+  isDialogOpen.value = true;
+};
+
+const handleCancelModal = () => {
+  isDialogOpen.value = false;
+  isDialogConfirmOpen.value = false;
+  Object.assign(formDataStudant, defaultStudant);
+};
 
 const onSearch = () => {
   console.log(inputSearch.value)
