@@ -65,10 +65,12 @@ O arquivo `server.ts` configura o servidor Fastify, registra os módulos relacio
 
 ## Instruções para Execução e Testes
 
-1. **Configuração do Banco de Dados:** Certifique-se de que o banco de dados MySQL esteja configurado corretamente, conforme as configurações fornecidas no arquivo `database/schema.prisma`.
+1. **Configuração do Banco de Dados com Docker:** Entre na pasta `backend` e execute o comando `docker compose up` para subir o banco de dados MySQL.
 
 2. **Instalação de Dependências:** Execute `npm install` para instalar as dependências necessárias.
 
-3. **Execução do Servidor:** Execute `npm start` para iniciar o servidor na porta 3100.
+3. **Execução do Servidor:** Execute `npm run start` para iniciar o servidor na porta 3100.
+   - Utilize a collection do postman disponível no repositório para fazer as requisições.
 
-4. **Execução dos Testes:** Execute `npm test` para executar os testes unitários.
+5. **Execução dos Testes:** Execute `npm run test` para executar os testes unitários.
+
