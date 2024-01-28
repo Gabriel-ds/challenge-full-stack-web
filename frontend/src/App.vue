@@ -152,6 +152,8 @@
 <script setup>
 import { vMaska } from "maska";
 import { onMounted, reactive, ref, watch } from "vue";
+import { useToast } from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-sugar.css";
 import logoSrc from "../src/assets/logo-mais-a-educacao.png";
 import { ApiStudents } from "./services/apiSudents";
 
@@ -164,11 +166,13 @@ const defaultStudant = {
 
 const isDrawerOpen = ref(true);
 const dataStudants = ref([]);
-const filterRows = ref([]);
 const inputSearch = ref("");
 const isDialogOpen = ref(false);
+const isDialogConfirmOpen = ref(false);
 const isEdit = ref(false);
 const searchData = ref("");
+const filterRows = ref([]);
+const form = ref(null);
 const formDataStudant = reactive({
   name: "",
   email: "",
@@ -176,6 +180,7 @@ const formDataStudant = reactive({
   ra: "",
 });
 
+const $toast = useToast();
 const apiStudents = ApiStudents();
   
 const getData = async () => {
@@ -286,5 +291,27 @@ const handleCancelModal = () => {
 const onSearch = () => {
   console.log(inputSearch.value)
   searchData.value = inputSearch.value;
+};
+
+const onSubmit = async () => {
+  try {
+    const isFormValid = await form.value.validate();
+    if (isFormValid.valid == false) {
+      return $toast.error("Dados de cadastro inválidos!");
+    }
+
+    if (isEdit.value == false) {
+      delete formDataStudant.id;
+      await apiStudents.createStudant(formDataStudant);
+    } else {
+      await apiStudents.updateStudant(formDataStudant, formDataStudant.id);
+    }
+    getData();
+    isDialogOpen.value = false;
+    Object.assign(formDataStudant, defaultStudant);
+    $toast.success("Estudante salvo com sucesso!");
+  } catch (error) {
+    $toast.error(error.response.data.message || "Erro no servidor");
+  }
 };
 </script>
