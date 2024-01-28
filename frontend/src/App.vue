@@ -300,7 +300,6 @@ const handleCancelModal = () => {
 };
 
 const onSearch = () => {
-  console.log(inputSearch.value);
   searchData.value = inputSearch.value;
 };
 
