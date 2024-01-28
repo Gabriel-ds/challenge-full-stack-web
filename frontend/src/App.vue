@@ -35,9 +35,27 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-
+import { onMounted, ref } from "vue";
 import logoSrc from "../src/assets/logo-mais-a-educacao.png";
+import { ApiStudents } from "./services/apiSudents";
+
+const apiStudents = ApiStudents();
+
 const isDrawerOpen = ref(true);
-  //
+
+
+  
+const getData = async () => {
+  try {
+    const data = await apiStudents.getStudants();
+    const dataSort = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    console.log(dataSort);
+  } catch (error) {
+    console.log("ERRO ==>", error);
+  }
+};
+
+onMounted(() => {
+  getData();
+});
 </script>
