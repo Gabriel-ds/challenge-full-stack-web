@@ -32,6 +32,24 @@
     <v-main>
       <v-container>
 
+        <h1 class="mb-6 text-h4">Consulta de alunos</h1>
+
+        <div style="display: flex; align-items: self-start; gap: 2rem">
+          <v-text-field
+            variant="outlined"
+            label="Pesquisar"
+            placeholder="Nome, RA ou CPF"
+            append-inner-icon="mdi-magnify"
+            v-model="inputSearch"
+            @keydown="(e) => e.key == 'Enter' && onSearch()"
+            @click:append-inner="onSearch"
+          />
+
+          <v-btn @click="handleAddStudent" variant="tonal" class="mt-2"
+            >Adicionar aluno</v-btn
+          >
+        </div>
+
       <v-card flat class="border mb-4">
           <v-table fixed-header>
             <thead>
@@ -80,17 +98,17 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import logoSrc from "../src/assets/logo-mais-a-educacao.png";
 import { ApiStudents } from "./services/apiSudents";
 
 const isDrawerOpen = ref(true);
 const dataStudants = ref([]);
 const filterRows = ref([]);
+const inputSearch = ref("");
+const searchData = ref("");
 
 const apiStudents = ApiStudents();
-
-
   
 const getData = async () => {
   try {
@@ -107,4 +125,34 @@ const getData = async () => {
 onMounted(() => {
   getData();
 });
+
+watch(inputSearch, () => {
+  if (!inputSearch.value.length) {
+    filterRows.value = dataStudants.value;
+    searchData.value = ''
+  }
+});
+
+watch(searchData, () => {
+  const filter =
+    dataStudants.value &&
+    dataStudants.value.filter(
+      (student) =>
+        student.name
+          .toLocaleLowerCase()
+          .includes(searchData.value.toLocaleLowerCase()) ||
+        student.ra
+          .toLocaleLowerCase()
+          .includes(searchData.value.toLocaleLowerCase()) ||
+        student.cpf
+          .toLocaleLowerCase()
+          .includes(searchData.value.toLocaleLowerCase())
+    );
+  filterRows.value = filter;
+});
+
+const onSearch = () => {
+  console.log(inputSearch.value)
+  searchData.value = inputSearch.value;
+};
 </script>
