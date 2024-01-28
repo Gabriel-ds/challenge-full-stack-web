@@ -11,6 +11,7 @@
 - Prisma
 - MySQL
 - Fastify
+- Axios
 
 ## Estrutura do Projeto
 
