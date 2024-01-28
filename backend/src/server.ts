@@ -1,7 +1,10 @@
+import cors from '@fastify/cors';
 import Fastify from 'fastify';
 import { studentRoutes } from './routes/student.routes';
 
 const app = Fastify();
+
+app.register(cors);
 
 app.register(studentRoutes, {
     prefix: '/students',
