@@ -3,125 +3,72 @@
 
 [![N|Solid](https://maisaedu.com.br/hubfs/site-grupo-a/logo-mais-a-educacao.svg)](https://maisaedu.com.br/) 
 
-O objetivo deste desafio é avaliar as competências técnicas dos candidatos a desenvolvedor Full Stack Web na Maior Plataforma de Educação do Brasil.
+# Documentação do Backend
 
-Será solicitado o desenvolvimento de uma Aplicação que realize a Matrícula do Aluno na Turma de Programação Web da instituição Edtech. Regras e requisitos técnicos estão detalhadas neste documento.
+## Tecnologias e Ferramentas Utilizadas
+- TypeScript
+- Node.js
+- Prisma
+- MySQL
+- Fastify
 
-# Especificações Técnicas
-- **Front-end:**
-  - Framework JS: [Vue.js](https://vuejs.org/)
-  - Framework de UI: [Vuetify](https://vuetifyjs.com/)
-- **API:** NodeJS
-- **Banco de Dados:** Postgress ou MySQL
-- **Idioma de escrita do código:** Inglês
+## Estrutura do Projeto
 
-# Requisitos
-## Contextualização
-Considere que uma Instituição de Ensino Superior precisa de uma solução para cadastrar e gerenciar matrículas de alunos em turmas online. Para realizar a matrícula, é necessário que o cadastro do aluno tenha sido realizado.
+O projeto do backend está organizado em algumas pastas principais:
 
-O desafio consiste em criar uma aplicação para o cadastro de alunos conforme os critérios de aceitação.
+1. **`database`**: Contém o arquivo `schema.prisma`, que define a estrutura do banco de dados usando o Prisma.
 
-## Mockups de interface
-A seguir, são apresentados alguns mockups de interface como um guia para a criação do front-end. Fique à vontade para usar sua criatividade na criação do front-end.
+2. **`interfaces`**: Armazena o arquivo `studants.interface.ts`, que contém as interfaces relacionadas aos estudantes.
 
-* Listagem de Alunos
-![Listagem de Alunos](/mockups/studants_list.png)
+3. **`repositories`**: Inclui o arquivo `studant.repository.ts`, que implementa a interface `StudantRepository` para interação com o banco de dados.
 
-* Criar/Editar Aluno
-![Listagem de Alunos](/mockups/studants_save.png)
+4. **`usecases`**: Contém o arquivo `student.usecases.ts`, que define as regras de negócios relacionadas aos estudantes, utilizando o repositório.
 
-## Histórias do Usuário
-- **Sendo** um usuário administrativo da Instituição
-- **Quero** gerenciar cadastros de alunos
-- **Para** que eu possa realizar a matrícula do aluno
+5. **`utils`**: Contém o arquivo `validationsUtils.ts`, que fornece funções de validação para garantir a integridade dos dados.
 
-### Critérios de aceite: 
+6. **`tests`**: Armazena o arquivo `student.usecase.test.ts`, que contém os testes unitários para as funcionalidades relacionadas aos estudantes.
 
-#### Cenário: Cadastrar novo aluno
-- **Dado** que estou na tela de Consulta de Alunos
-- **Quando** clico em Cadastrar Aluno
-- **Então** abre a tela de Cadastro do Aluno
-- **E** exibe os campos obrigatórios vazios
-####
-- **Dado** que inseri dados válidos nos campos
-- **Quando** clico em Salvar
-- **Então** cria o novo aluno na base
-- **E** retorna mensagem de sucesso
-####
-- **Dado** que inseri dados válidos nos campos
-- **Quando** clico em Cancelar
-- **Então** retorna para tela Consulta de Alunos
-- **E** não persiste a gravação dos dados no banco 
+7. **`server.ts`**: É o arquivo principal que configura o servidor Fastify, registra os módulos, e inicia o servidor na porta 3100.
 
-#### Cenário: Listar alunos cadastrados 
-- **Dado** que estou no Módulo Acadêmico
-- **Quando** clico no menu Alunos
-- **Então** abre a tela de Consulta de Alunos 
-- **E** exibe opção Cadastrar Aluno ao topo
-- **E** lista dados dos alunos cadastrados
-- **E** exibe opção Editar por aluno
-- **E** exibe opção Excluir por aluno
+## Prisma Schema (`database/schema.prisma`)
 
-#### Cenário: Editar cadastro de aluno
-- **Dado** que estou na listagem de alunos
-- **Quando** clico em Editar aluno
-- **Então** abre a tela de Cadastro do Aluno 
-- **E** exibe os campos do cadastro preenchidos
-- **E** habilita alteração dos campos editáveis
-####
-- **Dado** que estou na tela de Cadastro do Aluno
-- **Quando** clica em Salvar
-- **Então** grava os dados editáveis na base
-####
-- **Dado** que estou na tela de Cadastro do Aluno
-- **Quando** clica em Cancelar
-- **Então** retorna para a tela de Consulta de Alunos
-- **E** não persiste a gravação dos dados
+O arquivo `schema.prisma` define o esquema do banco de dados usando o Prisma. No momento, há uma única entidade chamada `Studant` com os campos necessários.
 
-#### Cenário: Excluir cadastro de aluno
-- **Dado** que estou na listagem de alunos
-- **Quando** clico em Excluir aluno
-- **Então** exibe a modal de confirmação de exclusão
-####
-- **Dado** que estou na modal de confirmação de exclusão 
-- **Quando** clico em Confirmar
-- **Então** então exclui o registro do aluno
-####
-- **Dado** que estou na modal de confirmação de exclusão
-- **Quando** clico em Cancelar
-- **Então** então fecha a modal e não persiste a exclusão
+## Interfaces (`interfaces/studants.interface.ts`)
 
-## Campos obrigatórios:
-- **Nome** (editável)
-- **Email** (editável)
-- **RA** (não editável) (chave única)
-- **CPF** (não editável)
+O arquivo `studants.interface.ts` contém as interfaces relacionadas aos estudantes. São elas:
 
-# Critérios de avaliação
-- Qualidade de escrita do código
-- Organização do projeto
-- Qualidade da API
-- Lógica da solução implementada
-- Qualidade da camada de persistência
-- Utilização do Git (quantidade e descrição dos commits, Git Flow, ...)
-- Validações
-- Tratamento de erros
-- Padrões de projeto e arquitetura
+- `Studant`: Representa um estudante com os campos `id`, `name`, `ra`, `cpf`, e `email`.
+- `StudantCreate`: Interface para a criação de um novo estudante.
+- `StudantUpdate`: Interface para a atualização de informações de um estudante.
+- `StudantRepository`: Interface que define métodos para interação com o banco de dados.
 
-# Desejável
-- Testes de unidade
-- Documentação da arquitetura de solução
+## Repositório (`repositories/studant.repository.ts`)
 
-# Diferenciais
-- Segurança da aplicação (autenticação, autorização, ...)
+O arquivo `studant.repository.ts` implementa a interface `StudantRepository` e utiliza o Prisma para interagir com o banco de dados MySQL. Fornece métodos para criar, buscar, listar, atualizar e excluir estudantes.
 
-# Instruções de entrega
-1. Crie um fork do repositório no seu GitHub
-2. Faça o push do código desenvolvido no seu Github
-3. Inclua um arquivo chamado COMMENTS.md explicando
-    - Decisão da arquitetura utilizada
-    - Lista de bibliotecas de terceiros utilizadas
-    - O que você melhoraria se tivesse mais tempo
-    - Quais requisitos obrigatórios que não foram entregues
-4. Informe ao recrutador quando concluir o desafio junto com o link do repositório
-5. Após revisão do projeto junto com a equipe de desevolvimento deixe seu repositório privado
+## Casos de Uso (`usecases/student.usecases.ts`)
+
+O arquivo `student.usecases.ts` define a classe `StudentUseCase`, que contém métodos para criar, listar, atualizar e excluir estudantes. Esta classe lida com a lógica de negócios, validações e interage com o repositório.
+
+## Utilitários (`utils/validationsUtils.ts`)
+
+O arquivo `validationsUtils.ts` fornece funções de validação, como a validação de dados de estudantes.
+
+## Testes Unitários (`tests/student.usecase.test.ts`)
+
+O arquivo `student.usecase.test.ts` contém testes unitários para garantir a funcionalidade correta dos métodos definidos na classe `StudentUseCase`. Utiliza uma classe de repositório mock para simular a interação com o banco de dados.
+
+## Servidor (`server.ts`)
+
+O arquivo `server.ts` configura o servidor Fastify, registra os módulos relacionados aos estudantes, e inicia o servidor na porta 3100.
+
+## Instruções para Execução e Testes
+
+1. **Configuração do Banco de Dados:** Certifique-se de que o banco de dados MySQL esteja configurado corretamente, conforme as configurações fornecidas no arquivo `database/schema.prisma`.
+
+2. **Instalação de Dependências:** Execute `npm install` para instalar as dependências necessárias.
+
+3. **Execução do Servidor:** Execute `npm start` para iniciar o servidor na porta 3100.
+
+4. **Execução dos Testes:** Execute `npm test` para executar os testes unitários.
