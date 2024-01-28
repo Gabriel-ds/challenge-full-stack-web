@@ -12,7 +12,7 @@
       <v-app-bar-nav-icon
         @click="isDrawerOpen = !isDrawerOpen"
       ></v-app-bar-nav-icon>
-        <img :src="logoSrc" height="50px" alt="my-logo" class="ml-3" />
+      <img :src="logoSrc" height="50px" alt="my-logo" class="ml-3" />
 
       <template #append>
         <v-btn icon class="mr-2">
@@ -20,18 +20,17 @@
             <v-icon icon="mdi-bell-outline"></v-icon>
           </v-badge>
         </v-btn>
-            <v-avatar>
-              <v-img
-                cover
-                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-              ></v-img>
-            </v-avatar>
+        <v-avatar>
+          <v-img
+            cover
+            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+          ></v-img>
+        </v-avatar>
       </template>
     </v-app-bar>
 
     <v-main>
       <v-container>
-
         <h1 class="mb-6 text-h4">Consulta de alunos</h1>
 
         <div style="display: flex; align-items: self-start; gap: 2rem">
@@ -50,7 +49,7 @@
           >
         </div>
 
-      <v-card flat class="border mb-4">
+        <v-card flat class="border mb-4">
           <v-table fixed-header>
             <thead>
               <tr>
@@ -91,61 +90,70 @@
             >Busca não encontrada</span
           >
         </div>
-
       </v-container>
     </v-main>
 
     <v-dialog v-model="isDialogOpen" width="600px" style="z-index: 10">
-            <v-card class="pa-6">
-              <v-card-title>{{
-                isEdit ? "Editar aluno" : "Adicionar aluno"
-              }}</v-card-title>
+      <v-card class="pa-6">
+        <v-card-title>{{
+          isEdit ? "Editar aluno" : "Adicionar aluno"
+        }}</v-card-title>
 
-              <v-form ref="form">
-                <v-card-text class="d-flex flex-column ga-4">
-                  <v-text-field
-                    variant="outlined"
-                    label="Nome"
-                    :rules="rules.name"
-                    v-model="formDataStudant.name"
-                  />
-                  <v-text-field
-                    variant="outlined"
-                    label="Email"
-                    :rules="rules.email"
-                    v-model="formDataStudant.email"
-                  />
-                  <v-text-field
-                    variant="outlined"
-                    :disabled="isEdit"
-                    :rules="rules.ra"
-                    label="RA"
-                    v-maska:[optionsRa]
-                    v-model="formDataStudant.ra"
-                  />
-                  <v-text-field
-                    variant="outlined"
-                    :disabled="isEdit"
-                    :rules="rules.cpf"
-                    label="CPF"
-                    v-maska:[optionsCpf]
-                    v-model="formDataStudant.cpf"
-                  />
-                </v-card-text>
+        <v-form ref="form">
+          <v-card-text class="d-flex flex-column ga-4">
+            <v-text-field
+              variant="outlined"
+              label="Nome"
+              :rules="rules.name"
+              v-model="formDataStudant.name"
+            />
+            <v-text-field
+              variant="outlined"
+              label="Email"
+              :rules="rules.email"
+              v-model="formDataStudant.email"
+            />
+            <v-text-field
+              variant="outlined"
+              :disabled="isEdit"
+              :rules="rules.ra"
+              label="RA"
+              v-maska:[optionsRa]
+              v-model="formDataStudant.ra"
+            />
+            <v-text-field
+              variant="outlined"
+              :disabled="isEdit"
+              :rules="rules.cpf"
+              label="CPF"
+              v-maska:[optionsCpf]
+              v-model="formDataStudant.cpf"
+            />
+          </v-card-text>
 
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn variant="text" @click="handleCancelModal">
-                    Cancelar
-                  </v-btn>
-                  <v-btn variant="tonal" color="success" @click="onSubmit">
-                    Salvar
-                  </v-btn>
-                </v-card-actions>
-              </v-form>
-            </v-card>
-          </v-dialog>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn variant="text" @click="handleCancelModal"> Cancelar </v-btn>
+            <v-btn variant="tonal" color="success" @click="onSubmit">
+              Salvar
+            </v-btn>
+          </v-card-actions>
+        </v-form>
+      </v-card>
+    </v-dialog>
 
+    <v-dialog v-model="isDialogConfirmOpen" width="600px" style="z-index: 10">
+      <v-card class="pa-6">
+        <v-card-title>Tem certeza que deseja excluir?</v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn variant="text" @click="handleCancelModal"> Cancelar </v-btn>
+          <v-btn variant="tonal" color="success" @click="onDelete">
+            Confirmar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-app>
 </template>
 
@@ -170,6 +178,7 @@ const inputSearch = ref("");
 const isDialogOpen = ref(false);
 const isDialogConfirmOpen = ref(false);
 const isEdit = ref(false);
+const itemToDelete = ref('')
 const searchData = ref("");
 const filterRows = ref([]);
 const form = ref(null);
@@ -182,16 +191,18 @@ const formDataStudant = reactive({
 
 const $toast = useToast();
 const apiStudents = ApiStudents();
-  
+
 const getData = async () => {
   try {
     const data = await apiStudents.getStudants();
-    const dataSort = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    const dataSort = data.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
     console.log(dataSort);
     dataStudants.value = dataSort;
     filterRows.value = dataSort;
   } catch (error) {
-    console.log("ERRO ==>", error);
+    $toast.error("Erro ao buscar dados no servidor");
   }
 };
 
@@ -202,7 +213,7 @@ onMounted(() => {
 watch(inputSearch, () => {
   if (!inputSearch.value.length) {
     filterRows.value = dataStudants.value;
-    searchData.value = ''
+    searchData.value = "";
   }
 });
 
@@ -289,7 +300,7 @@ const handleCancelModal = () => {
 };
 
 const onSearch = () => {
-  console.log(inputSearch.value)
+  console.log(inputSearch.value);
   searchData.value = inputSearch.value;
 };
 
@@ -300,15 +311,15 @@ const handleEditStudant = (studant) => {
 };
 
 const handleDelete = (id) => {
-  itemToDelete.value = id
-  isDialogConfirmOpen.value = true
-}
+  itemToDelete.value = id;
+  isDialogConfirmOpen.value = true;
+};
 
 const onDelete = async () => {
   try {
     await apiStudents.deleteStudant(itemToDelete.value);
     isDialogConfirmOpen.value = false;
-    $toast.success("Aluno excluído com sucesso!")
+    $toast.success("Aluno excluído com sucesso!");
     getData();
   } catch (error) {
     $toast.error(error.response.data.message || "Erro no servidor");
