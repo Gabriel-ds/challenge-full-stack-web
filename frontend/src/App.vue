@@ -293,6 +293,28 @@ const onSearch = () => {
   searchData.value = inputSearch.value;
 };
 
+const handleEditStudant = (studant) => {
+  isEdit.value = true;
+  Object.assign(formDataStudant, studant);
+  isDialogOpen.value = true;
+};
+
+const handleDelete = (id) => {
+  itemToDelete.value = id
+  isDialogConfirmOpen.value = true
+}
+
+const onDelete = async () => {
+  try {
+    await apiStudents.deleteStudant(itemToDelete.value);
+    isDialogConfirmOpen.value = false;
+    $toast.success("Aluno excluído com sucesso!")
+    getData();
+  } catch (error) {
+    $toast.error(error.response.data.message || "Erro no servidor");
+  }
+};
+
 const onSubmit = async () => {
   try {
     const isFormValid = await form.value.validate();
