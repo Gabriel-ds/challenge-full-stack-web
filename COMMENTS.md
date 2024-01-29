@@ -1,6 +1,6 @@
 # Comentários Adicionais
 
-## Decisões e Observações
+## Backend: Decisões e Observações
 
 ### Decisão da Arquitetura Utilizada
 
@@ -27,6 +27,47 @@ Se houvesse mais tempo disponível, algumas melhorias poderiam ser implementadas
 
 - **Documentação de API:** Criação de documentação detalhada para a API, utilizando o Swagger.
 
-### Requisitos Obrigatórios Não Entregues
+
+## Frontend: Decisões e Observações
+
+### Decisão da Arquitetura Utilizada
+
+Optou-se por uma abordagem frontend utilizando o framework Vue.js e Vuetify, devido à sua flexibilidade e facilidade de integração com a API do backend.
+### Bibliotecas de Terceiros Utilizadas
+
+- **Vue.js:** O framework Vue.js foi escolhido para a construção da interface do usuário, proporcionando uma experiência de desenvolvimento declarativa e reativa.
+
+- **Vuetify (v3.0.0):** Utilizado para criar uma interface de usuário atraente e consistente. Vuetify oferece uma variedade de componentes Vue pré-projetados e temas para facilitar o desenvolvimento.
+
+- **Axios (v1.6.7):** Mantendo a consistência com o backend, a biblioteca Axios é utilizada para realizar requisições HTTP, facilitando a comunicação entre o frontend e o backend.
+
+- **Maska (v2.1.11):** Adotada para a aplicação de máscaras em campos de entrada, como CPF e RA, proporcionando uma melhor experiência ao usuário.
+
+- **Vue Toast Notification (v3.1.2):** Introduzida para exibir notificações leves e elegantes na aplicação, fornecendo feedback visual ao usuário.
+
+### Melhorias Se Tivesse Mais Tempo
+
+Se houvesse mais tempo disponível, algumas melhorias poderiam ser implementadas no frontend:
+
+- **Componentização:** Refatoração da aplicação para uma estrutura de componentes mais modular, utilizando composição e reutilização eficiente de componentes em diferentes partes da aplicação. Isso facilitaria a manutenção, escalabilidade e entendimento do código.
+  
+- **Autenticação e Autorização:** Adição de uma camada de autenticação para garantir a segurança da aplicação, especialmente em operações sensíveis.
+
+- **Melhorias na Interface de Usuário:** Aprimoramento da interface de usuário com animações, transições e otimizações visuais.
+
+- **Gerenciamento de Estado:** Implementação de um gerenciamento de estado mais avançado, possivelmente utilizando Vuex, para facilitar o compartilhamento de dados entre componentes.
+
+- **Testes Automatizados no Frontend:** Desenvolvimento e execução de testes automatizados no frontend para garantir a integridade e funcionalidade da aplicação.
+
+- **Documentação Detalhada:** Elaboração de uma documentação detalhada para os componentes e serviços, facilitando a manutenção e compreensão do código.
+
+
+# Requisitos Obrigatórios Não Entregues
 
 Todos os requisitos obrigatórios foram implementados conforme especificado no desafio. Cada funcionalidade solicitada, desde o cadastro até a exclusão de alunos, foi implementada de acordo com os critérios de aceitação.
+
+#
+
+### Para mais informações sobre a documentação acesse os arquivos README.md do backend e frontend:
+- ``backend/README.md``
+- ``frontend/README.md``
