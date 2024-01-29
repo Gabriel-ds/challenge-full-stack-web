@@ -19,7 +19,7 @@ Optou-se por uma arquitetura que segue os princípios de separação de responsa
 
 Se houvesse mais tempo disponível, algumas melhorias poderiam ser implementadas:
 
-- **Autenticação e Autorização:** Adição de uma camada de autenticação para garantir a segurança da aplicação, especialmente em operações sensíveis.
+- **Autenticação e Autorização:** Adição de uma camada de autenticação para garantir a segurança da aplicação, especialmente em operações sensíveis (JWT).
 
 - **Manuseio de Erros Aprimorado:** Melhorar o tratamento de erros em todo o código, incluindo mensagens mais informativas e respostas adequadas às requisições.
 
@@ -27,12 +27,12 @@ Se houvesse mais tempo disponível, algumas melhorias poderiam ser implementadas
 
 - **Documentação de API:** Criação de documentação detalhada para a API, utilizando o Swagger.
 
-
 ## Frontend: Decisões e Observações
 
 ### Decisão da Arquitetura Utilizada
 
 Optou-se por uma abordagem frontend utilizando o framework Vue.js e Vuetify, devido à sua flexibilidade e facilidade de integração com a API do backend.
+
 ### Bibliotecas de Terceiros Utilizadas
 
 - **Vue.js:** O framework Vue.js foi escolhido para a construção da interface do usuário, proporcionando uma experiência de desenvolvimento declarativa e reativa.
@@ -50,7 +50,7 @@ Optou-se por uma abordagem frontend utilizando o framework Vue.js e Vuetify, dev
 Se houvesse mais tempo disponível, algumas melhorias poderiam ser implementadas no frontend:
 
 - **Componentização:** Refatoração da aplicação para uma estrutura de componentes mais modular, utilizando composição e reutilização eficiente de componentes em diferentes partes da aplicação. Isso facilitaria a manutenção, escalabilidade e entendimento do código.
-  
+
 - **Autenticação e Autorização:** Adição de uma camada de autenticação para garantir a segurança da aplicação, especialmente em operações sensíveis.
 
 - **Melhorias na Interface de Usuário:** Aprimoramento da interface de usuário com animações, transições e otimizações visuais.
@@ -58,9 +58,6 @@ Se houvesse mais tempo disponível, algumas melhorias poderiam ser implementadas
 - **Gerenciamento de Estado:** Implementação de um gerenciamento de estado mais avançado, possivelmente utilizando Vuex, para facilitar o compartilhamento de dados entre componentes.
 
 - **Testes Automatizados no Frontend:** Desenvolvimento e execução de testes automatizados no frontend para garantir a integridade e funcionalidade da aplicação.
-
-- **Documentação Detalhada:** Elaboração de uma documentação detalhada para os componentes e serviços, facilitando a manutenção e compreensão do código.
-
 
 # Requisitos Obrigatórios Não Entregues
 
