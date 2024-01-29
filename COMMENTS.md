@@ -68,6 +68,4 @@ Todos os requisitos obrigatórios foram implementados conforme especificado no d
 
 #
 
-### Para mais informações sobre a documentação acesse os arquivos README.md do backend e frontend:
-- ``backend/README.md``
-- ``frontend/README.md``
+### Para mais informações sobre a documentação acesse o arquivo README.md.
