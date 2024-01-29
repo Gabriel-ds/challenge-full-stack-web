@@ -1,77 +1,49 @@
-# Vuetify (Default)
++A Educação - Full Stack Web Developer
+===================
 
-This is the official scaffolding tool for Vuetify, designed to give you a head start in building your new Vuetify application. It sets up a base template with all the necessary configurations and standard directory structure, enabling you to begin development without the hassle of setting up the project from scratch.
+[![N|Solid](https://maisaedu.com.br/hubfs/site-grupo-a/logo-mais-a-educacao.svg)](https://maisaedu.com.br/) 
 
-## ❗️ Important Links
+# Documentação do Frontend
 
-- 📄 [Docs](https://vuetifyjs.com/)
-- 🚨 [Issues](https://issues.vuetifyjs.com/)
-- 🏬 [Store](https://store.vuetifyjs.com/)
-- 🎮 [Playground](https://play.vuetifyjs.com/)
-- 💬 [Discord](https://community.vuetifyjs.com)
+## Tecnologias e Ferramentas Utilizadas
+- **Vue.js (v3.3.0):** Um framework progressivo para construir interfaces de usuário.
+- **Vuetify (v3.0.0):** Biblioteca de componentes Vue para criar interfaces de usuário ricas e atraentes.
+- **Axios (v1.6.7):** Biblioteca para fazer requisições HTTP, facilitando a integração com APIs.
+- **Maska (v2.1.11):** Aplicar máscaras a campos de entrada, como CPF e RA.
+- **Vue Toast Notification (v3.1.2):** Exibe notificações personalizadas.
 
-## 💿 Install
+## Estrutura do Projeto
 
-Set up your project using your preferred package manager. Use the corresponding command to install the dependencies:
+O projeto do frontend está estruturado em arquivos Vue.js principais:
 
-| Package Manager                                                | Command        |
-|---------------------------------------------------------------|----------------|
-| [yarn](https://yarnpkg.com/getting-started)                   | `yarn install` |
-| [npm](https://docs.npmjs.com/cli/v7/commands/npm-install)     | `npm install`  |
-| [pnpm](https://pnpm.io/installation)                          | `pnpm install` |
-| [bun](https://bun.sh/#getting-started)                        | `bun install`  |
+1. **`frontend/src/App.vue`**: Arquivo principal do Vue.js que define a estrutura da aplicação, incluindo navegação, barra de aplicativos, consulta de alunos, formulário de edição/adicionar e a tabela de alunos.
 
-After completing the installation, your environment is ready for Vuetify development.
+2. **`frontend/src/services/apiStudents.js`**: Arquivo que define o serviço para realizar chamadas de API relacionadas aos estudantes, utilizando o Axios.
 
-## ✨ Features
+## Componentes Principais (frontend/src/App.vue)
 
-- 🖼️ **Optimized Front-End Stack**: Leverage the latest Vue 3 and Vuetify 3 for a modern, reactive UI development experience. [Vue 3](https://v3.vuejs.org/) | [Vuetify 3](https://vuetifyjs.com/en/)
-- 🗃️ **State Management**: Integrated with [Pinia](https://pinia.vuejs.org/), the intuitive, modular state management solution for Vue.
-- 🚦 **Routing and Layouts**: Utilizes Vue Router for SPA navigation and vite-plugin-vue-layouts for organizing Vue file layouts. [Vue Router](https://router.vuejs.org/) | [vite-plugin-vue-layouts](https://github.com/JohnCampionJr/vite-plugin-vue-layouts)
-- ⚡ **Next-Gen Tooling**: Powered by Vite, experience fast cold starts and instant HMR (Hot Module Replacement). [Vite](https://vitejs.dev/)
-- 🧩 **Automated Component Importing**: Streamline your workflow with unplugin-vue-components, automatically importing components as you use them. [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
+O arquivo App.vue define a estrutura principal da aplicação Vue.js, incluindo:
 
-These features are curated to provide a seamless development experience from setup to deployment, ensuring that your Vuetify application is both powerful and maintainable.
+- **Barra de Navegação**: Contendo links para Home e Alunos.
+- **Consulta de Alunos:** Uma tabela que exibe os alunos e permite filtrar por nome, RA ou CPF.
+- **Formulário de Edição/Adição:** Modal que permite adicionar um novo aluno ou editar um existente.
+- **Integração com API:** Utilização do serviço apiStudents.js para realizar chamadas à API do backend.
 
-## 💡 Usage
+## Serviço de API (frontend/src/services/apiStudents.js)
 
-This section covers how to start the development server and build your project for production.
+O arquivo apiStudents.js define funções para realizar chamadas à API do backend utilizando o Axios. As principais funções incluem:
 
-### Starting the Development Server
+- ``getStudants:`` Obter a lista de estudantes.
+- ``createStudant:`` Criar um novo estudante.
+- ``deleteStudant:`` Excluir um estudante.
+- ``updateStudant:`` Atualizar informações de um estudante.
 
-To start the development server with hot-reload, run the following command. The server will be accessible at [http://localhost:3000](http://localhost:3000):
 
-```bash
-yarn dev
-```
+## Instruções para Execução e Testes
 
-(Repeat for npm, pnpm, and bun with respective commands.)
+1. **Instalação de Dependências:** Execute npm install para instalar as dependências necessárias.
+2. **Execução em Modo de Desenvolvimento:** Execute npm run dev para iniciar o servidor de desenvolvimento Vite.
 
-### Building for Production
 
-To build your project for production, use:
 
-```bash
-yarn build
-```
-
-(Repeat for npm, pnpm, and bun with respective commands.)
-
-Once the build process is completed, your application will be ready for deployment in a production environment.
-
-## 💪 Support Vuetify Development
-
-This project is built with [Vuetify](https://vuetifyjs.com/en/), a UI Library with a comprehensive collection of Vue components. Vuetify is an MIT licensed Open Source project that has been made possible due to the generous contributions by our [sponsors and backers](https://vuetifyjs.com/introduction/sponsors-and-backers/). If you are interested in supporting this project, please consider:
-
-- [Requesting Enterprise Support](https://support.vuetifyjs.com/)
-- [Sponsoring John on Github](https://github.com/users/johnleider/sponsorship)
-- [Sponsoring Kael on Github](https://github.com/users/kaelwd/sponsorship)
-- [Supporting the team on Open Collective](https://opencollective.com/vuetify)
-- [Becoming a sponsor on Patreon](https://www.patreon.com/vuetify)
-- [Becoming a subscriber on Tidelift](https://tidelift.com/subscription/npm/vuetify)
-- [Making a one-time donation with Paypal](https://paypal.me/vuetify)
-
-## 📑 License
-[MIT](http://opensource.org/licenses/MIT)
-
-Copyright (c) 2016-present Vuetify, LLC
+Esta documentação fornece uma visão geral do frontend da aplicação, detalhando as tecnologias utilizadas, a estrutura do projeto, as bibliotecas empregadas e instruções para execução e testes.
