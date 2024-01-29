@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "d872207b-064c-49d0-ab41-37e7448d592a",
+		"name": "a+ educação",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23862489"
+	},
+	"item": [
+		{
+			"name": "List students",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3100/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Gabriel 2\",\r\n    \"cpf\": \"123123345421\",\r\n    \"ra\": \"12345678910\",\r\n    \"email\": \"gabriel@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3100/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Student",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    // \"id\": \"5a6c5e7a-fc0d-4f73-aa48-90eae2becce6\",\r\n    \"name\": \"Aryna\",\r\n    \"email\": \"aryna@email.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3100/students/5a6c5e7a-fc0d-4f73-aa48-90eae2becce6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"students",
+						"5a6c5e7a-fc0d-4f73-aa48-90eae2becce6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete student",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Gabriel\",\r\n    \"cpf\": \"123123\",\r\n    \"ra\": 123\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3100/students/5f9bc2da-1f93-4969-b271-84e27c74f5be",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3100",
+					"path": [
+						"students",
+						"5f9bc2da-1f93-4969-b271-84e27c74f5be"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
