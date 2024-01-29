@@ -126,3 +126,5 @@ O arquivo apiStudents.js define funções para realizar chamadas à API do backe
 #
 
 Esta documentação fornece uma visão geral do frontend e backend da aplicação, detalhando as tecnologias utilizadas, a estrutura do projeto, as bibliotecas empregadas e instruções para execução e testes.
+
+Para ver os comentários adicionais e observações acesse o arquivo COMMENTS.md
