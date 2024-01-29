@@ -2,7 +2,7 @@
   <v-app theme="dark">
     <v-navigation-drawer v-model="isDrawerOpen">
       <v-list>
-        <v-list-subheader>Módulo acadêmico</v-list-subheader>
+        <v-list-item>Módulo acadêmico</v-list-item>
         <v-list-item prepend-icon="mdi-home">Home</v-list-item>
         <v-list-item prepend-icon="mdi-account" active>Alunos</v-list-item>
       </v-list>
